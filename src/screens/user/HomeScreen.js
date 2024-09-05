@@ -39,6 +39,8 @@ export default function HomeScreen() {
           />
         )}
         {pizzas &&
+          !error &&
+          !loading &&
           pizzas.map((pizza) => (
             <div className="col-md-4" key={pizza._id}>
               <div>
@@ -48,6 +50,8 @@ export default function HomeScreen() {
           ))}
         <hr className="heading-line" />
         {others &&
+          !error &&
+          !loading &&
           others.map((item) => (
             <div className="col-md-4" key={item._id}>
               <div>
