@@ -1,11 +1,13 @@
 import axios from "axios";
+  const baseurl = process.env.REACT_APP_SERVER_URL
+
 
 export const deliveryPartnerRegisterAction =
   (deliverypartner) => async (dispatch) => {
     dispatch({ type: "DELIVERY_PARTNER_REGISTER_REQUEST" });
     try {
       const response = await axios.post(
-        "/api/deliverypartner/register",
+        baseurl+"/api/deliverypartner/register",
         deliverypartner
       );
       dispatch({ type: "DELIVERY_PARTNER_REGISTER_SUCCESS" });
@@ -17,7 +19,7 @@ export const deliveryPartnerRegisterAction =
 export const deliveryPartnerLoginAction = (user) => async (dispatch) => {
   dispatch({ type: "DELIVERY_PARTNER_LOGIN_REQUEST" });
   try {
-    const response = await axios.post("/api/deliverypartner/login", user);
+    const response = await axios.post(baseurl+"/api/deliverypartner/login", user);
     dispatch({
       type: "DELIVERY_PARTNER_LOGIN_SUCCESS",
       payload: response.data,
@@ -31,7 +33,7 @@ export const deliveryPartnerSingle = (username) => async (dispatch) => {
   dispatch({ type: "DELIVERY_PARTNER_SINGLE_REQUEST" });
   try {
     console.log(username);
-    const response = await axios.post("/api/deliverypartner/getdp", {
+    const response = await axios.post(baseurl+"/api/deliverypartner/getdp", {
       username,
     });
     dispatch({

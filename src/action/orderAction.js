@@ -5,8 +5,9 @@ export const orderAction = (token, amount) => async (dispatch, getState) => {
   const cartItem = getState().addToCartReducers.cartItem;
   const user = getState().userLoginReducer.user;
   const data = { token, amount, cartItem, user };
+  const baseurl = process.env.REACT_APP_SERVER_URL
   try {
-    const response = await axios.post("/api/order/placeorder", data);
+    const response = await axios.post(baseurl+"/api/order/placeorder", data);
     //console.log(response)  --- for checking
     dispatch({ type: "ORDER_SUCCESS" });
   } catch (error) {
@@ -19,7 +20,7 @@ export const allOrderAction = () => async (dispatch, getState) => {
   dispatch({ type: "ALL_ORDER_REQUEST" });
   const user = getState().userLoginReducer.user;
   try {
-    const orders = await axios.post("/api/order/userorders", {
+    const orders = await axios.post(baseurl+"/api/order/userorders", {
       userid: user._id,
     });
     //console.log(orders.data.length);
@@ -35,7 +36,7 @@ export const allOrderAction = () => async (dispatch, getState) => {
 export const allAdminOrdersAction = () => async (dispatch) => {
   dispatch({ type: "ALL_ADMIN_ORDER_REQUEST" });
   try {
-    const response = await axios.get("/api/order/allorders");
+    const response = await axios.get(baseurl+"/api/order/allorders");
     dispatch({ type: "ALL_ADMIN_ORDER_SUCCESS", payload: response.data });
   } catch (error) {
     dispatch({ type: "ALL_ADMIN_ORDER_FAILED", payload: error });
@@ -46,7 +47,7 @@ export const orderUpdateAction = (id, dp) => async (dispatch) => {
   console.log(id);
   dispatch({ type: "ORDER_UPDATE_REQUEST" });
   try {
-    const response = await axios.post("/api/order/updateorder", { id, dp });
+    const response = await axios.post(baseurl+"/api/order/updateorder", { id, dp });
     console.log(response);
     alert("Ordered Updated! Please refresh the page");
     dispatch({ type: "ORDER_UPDATE_SUCCESS" });
@@ -58,7 +59,7 @@ export const orderUpdateAction = (id, dp) => async (dispatch) => {
 export const orderUpdateStatusAction = (id, status) => async (dispatch) => {
   dispatch({ type: "ORDER_UPDATE_REQUEST" });
   try {
-    const response = await axios.post("/api/order/updatestatus", {
+    const response = await axios.post(baseurl+"/api/order/updatestatus", {
       id,
       status,
     });

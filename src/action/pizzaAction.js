@@ -1,10 +1,13 @@
 import axios from 'axios';
+  const baseurl = process.env.REACT_APP_SERVER_URL
+
+
 
 export const getAllPizzaDataAction=()=>async dispatch=>{
     dispatch({type:"GET_PIZZA_REQUEST"});
     
     try {
-        const pizza = await axios.get('/api/pizza/pizzadata');
+        const pizza = await axios.get(baseurl+'/api/pizza/pizzadata');
         //console.log(pizza); -- for checking....
         dispatch({type:"GET_PIZZA_SUCCESS", payload:pizza.data});
     } catch (error) {
@@ -16,7 +19,7 @@ export const filterPizzaDataAction=(searchkey,category)=>async dispatch=>{
     dispatch({type:"GET_PIZZA_REQUEST"});
     
     try {
-        const pizza = await axios.get('/api/pizza/pizzadata');
+        const pizza = await axios.get(baseurl+'/api/pizza/pizzadata');
         //console.log(pizza); -- for checking....
         var filter = pizza.data.filter(item=>item.name.toLowerCase().includes(searchkey));
         if(category!=='all'){
@@ -31,7 +34,7 @@ export const filterPizzaDataAction=(searchkey,category)=>async dispatch=>{
 export const addNewPizza = (pizza)=>async(dispatch)=>{
     dispatch({type:'ADD_NEW_PIZZA_REQUEST'});
     try {
-        const response = await axios.post('/api/pizza/addnew',pizza);
+        const response = await axios.post(baseurl+'/api/pizza/addnew',pizza);
         //console.log(response);---- for checking
         alert('Added succeddfully');
         dispatch({type:'ADD_NEW_PIZZA_SUCCESS'});
@@ -43,7 +46,7 @@ export const addNewPizza = (pizza)=>async(dispatch)=>{
 export const deletePizzaAction=(item)=>async(dispatch)=>{
     dispatch({type:'DELETE_PIZZA_REQUEST'});
     try {
-        const response = await axios.post('/api/pizza/deletepizza',item);
+        const response = await axios.post(baseurl+'/api/pizza/deletepizza',item);
         dispatch({type:'DELETE_PIZZA_SUCCESS'});
     } catch (error) {
         dispatch({type:'DELETE_PIZZA_FAILED'});
