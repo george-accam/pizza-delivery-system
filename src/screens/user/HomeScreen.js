@@ -38,16 +38,15 @@ export default function HomeScreen() {
             style={{ width: "80%", height: "100%" }}
           />
         )}
-        {pizzas &&
-          !error &&
+        {!error &&
           !loading &&
-          pizzas?.map((pizza) => (
+          pizzas?.length > 0 &&
+          pizzas.map((pizza) => (
             <div className="col-md-4" key={pizza._id}>
-              <div>
-                <Pizzas pizza={pizza} />
-              </div>
+              <Pizzas pizza={pizza} />
             </div>
           ))}
+
         <hr className="heading-line" />
         {others &&
           !error &&
