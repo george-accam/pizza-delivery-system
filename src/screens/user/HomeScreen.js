@@ -39,12 +39,19 @@ export default function HomeScreen() {
             style={{ width: "80%", height: "100%" }}
           />
         )}
-        {!pizzaError &&
-          !pizzaLoading &&
-          pizzas?.length > 0 &&
+        {Array.isArray(pizzas) &&
+          pizzas.length > 0 &&
           pizzas.map((pizza) => (
             <div className="col-md-4" key={pizza._id}>
               <Pizzas pizza={pizza} />
+            </div>
+          ))}
+
+        {Array.isArray(others) &&
+          others.length > 0 &&
+          others.map((item) => (
+            <div className="col-md-4" key={item._id}>
+              <Pizzas pizza={item} />
             </div>
           ))}
 
