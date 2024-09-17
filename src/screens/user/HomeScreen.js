@@ -39,21 +39,21 @@ export default function HomeScreen() {
             style={{ width: "80%", height: "100%" }}
           />
         )}
-        {Array.isArray(pizzas) &&
-          pizzas.length > 0 &&
-          pizzas.map((pizza) => (
-            <div className="col-md-4" key={pizza._id}>
-              <Pizzas pizza={pizza} />
-            </div>
-          ))}
+        {Array.isArray(pizzas) && pizzas.length > 0
+          ? pizzas.map((pizza) => (
+              <div className="col-md-4" key={pizza._id}>
+                <Pizzas pizza={pizza} />
+              </div>
+            ))
+          : !loading && <div>No pizzas available</div>}
 
-        {Array.isArray(others) &&
-          others.length > 0 &&
-          others.map((item) => (
-            <div className="col-md-4" key={item._id}>
-              <Pizzas pizza={item} />
-            </div>
-          ))}
+        {Array.isArray(others) && others.length > 0
+          ? others.map((item) => (
+              <div className="col-md-4" key={item._id}>
+                <Pizzas pizza={item} />
+              </div>
+            ))
+          : !loading && <div>No other items available</div>}
 
         <hr className="heading-line" />
 
