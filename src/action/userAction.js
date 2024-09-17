@@ -4,7 +4,7 @@ const baseurl = process.env.REACT_APP_SERVER_URL;
 export const userRegisterAction = (user) => async (dispatch) => {
   dispatch({ type: "USER_REGISTER_REQUEST" });
   try {
-    const response = await axios.post(baseurl + "/api/user/register", user);
+    const response = await axios.post(`${baseurl}/api/user/register`, user);
     console.log(response);
     dispatch({ type: "USER_REGISTER_SUCCESS" });
   } catch (error) {
